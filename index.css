@@ -1,0 +1,81 @@
+
+/*================================================================
+//Basic
+*/
+
+body{
+    margin: 0;
+    width: 100%;
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+section{
+    border: 0.1rem solid black;
+    margin: 1rem;
+    padding: 0.5rem;
+    width: calc(50% - (0.1rem + 1rem + 0.5rem) * 2);
+}
+
+section:last-child{
+    width: 100%;
+}
+
+section > header{
+    border-top: solid black 0.1rem;
+    padding-top: 0.5rem;
+    text-align: center;
+}
+
+table{
+    width: 100%;
+}
+textarea{
+    width: 100%;
+}
+input{
+    width: 100%;
+}
+
+/*================================================================
+//Graph
+*/
+
+#graph{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    overflow-x: scroll;
+    overflow: auto;
+}
+
+.node{
+    display: inline-block;
+    padding: 0.5rem;
+}
+
+.node > .node{
+    
+}
+
+.node > header{
+    display: flex;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+}
+
+.node > header > *{
+    border: 0.1rem solid black;
+    width: min-content;
+}
+
+.node .highlight > header{
+    color: blue;
+}
+
+.node .neighbour > header{
+    color: red;
+    font-weight: bold;
+}

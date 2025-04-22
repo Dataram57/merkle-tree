@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Merkle Proof</title>
+        <link href="index.css" rel="stylesheet">
+    </head>
+    <body>
+        <section>
+            <header>Create Challenge</header>
+            <table>
+                <tr>
+                    <td>Secret:</td>
+                    <td><input type="text" id="challenge_secret" value="secret"></td>
+                </tr>
+                <tr>
+                    <td>Salt:</td>
+                    <td><input type="text" id="challenge_salt" value="salt"></td>
+                </tr>
+                <tr>
+                    <td>Depth:</td>
+                    <td><input type="number" min="1" max="10" value="4" id="challenge_depth"></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><button onclick="CreateChallenge();">Render Tree</button></td>
+                </tr>
+            </table>
+
+            <header>Create Proof</header>
+            <table>
+                <tr>
+                    <td>Select route index:</td>
+                    <td><input type="number" min="0" max="15" value="0" id="proof_index"></td></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><button onclick="CreateProof();">Generate Proof</button></td>
+                </tr>
+                <tr>
+                    <td>Merkle Proof:</td>
+                    <td><textarea id="proof_output" disabled cols="64" rows="16"></textarea></td>
+                </tr>
+            </table>
+
+        </section>
+
+        <section>
+            <header>Verify Proof</header>
+            <table>
+                <tr>
+                    <td>Merkle Root:</td>
+                    <td><input type="text" id="verify_root" value=""></td>
+                </tr>
+                <tr>
+                    <td>Salt:</td>
+                    <td><input type="text" id="verify_salt" value="salt"></td>
+                </tr>
+                <tr>
+                    <td>Hashes (proof):</td>
+                    <td><textarea id="verify_proof" cols="64" rows="16"></textarea></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><button onclick="VerifyProof();">Verify</button></td>
+                </tr>
+                <tr>
+                    <th>Result:</th>
+                    <th><p id="verify_result">N/A</p></th>
+                </tr>
+            </table>
+
+            
+        </section>
+
+        <section id="graph">
+            <div class="node">
+                <header><div>0123</div></header>
+                <div class="node">
+                    <div class="node">
+                        <header><div>01</div></header>
+                        <div class="node">
+                            0
+                        </div>
+                        <div class="node">
+                            1
+                        </div>
+                    </div>
+                </div>
+                <div class="node">
+                    <div class="node">
+                        <header><div>23</div></header>
+                        <div class="node">
+                            2
+                        </div>
+                        <div class="node">
+                            3
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script src="index.js"></script>
+    </body>
+</html>
