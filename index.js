@@ -20,6 +20,7 @@ const Trim = message => message.length > 4 ? message.substring(0, 4) + "..." : m
 
 const GenerateLeaves = async (secret, salt, depth) => {
     leaves = [];
+    salt = await Hash(salt + depth);
     lastHash = secret;
     for(depth = 2 ** depth; depth > 0; depth--){
         lastHash = await Hash(lastHash + salt);
@@ -179,10 +180,19 @@ const CreateProof = async () => {
     const root = proof.pop();
 
     //update textarea
-    let txt = "Merkle Root:"
+    let txt = "";
+    txt += "================================================================";
+    txt += "\nChallenge Information:";
+    txt += "\n\nMerkle Root:"
     txt += "\n" + root;
     txt += "\n\nSalt:"
     txt += "\n" + salt;
+    txt += "\n\nDepth:"
+    txt += "\n" + depth;
+    txt += "\n\n================================================================";
+    txt += "\nProof Information:";
+    txt += "\n\nMerkle Root (Proof):";
+    txt += "\n" + root;
     txt += "\n\nHashes (Proof):\n";
     let txt2 = leaves[i];
     for(i = 0; i < proof.length; i++){
@@ -192,7 +202,6 @@ const CreateProof = async () => {
 
     //autocomplete verify
     document.getElementById("verify_root").value = root;
-    document.getElementById("verify_salt").value = salt;
     document.getElementById("verify_proof").value = txt2;
 
     //render
@@ -202,7 +211,6 @@ const CreateProof = async () => {
 const VerifyProof = async () => {
     //get data
     const root = document.getElementById("verify_root").value;
-    const salt = document.getElementById("verify_salt").value;
     const proof = document.getElementById("verify_proof").value.split('\n')                      // split into lines
     .map(line => line.trim())         // trim whitespace
     .filter(line => line.length > 0); // remove empty lines
@@ -221,6 +229,7 @@ const VerifyProof = async () => {
 
 //================================================================
 //#region Main
+
 window.onload = () =>{
 };
 
